@@ -171,6 +171,9 @@
 <header-component
   id="header-component"
   class="{{ class }}"
+  
+  
+  
   {% if transparent %}
     transparent="{{ transparent }}"
   {% endif %}
@@ -180,6 +183,10 @@
   data-skip-node-update
   data-scroll-direction="none"
 >
+ <p style="text-align:center; background:#f0f0f0; padding:10px;">
+    Hello from Abdelrahman-Elkady 🚀
+  </p>
+  
   {% for row in rows %}
     {% liquid
       assign scheme = 'color_scheme_' | append: row

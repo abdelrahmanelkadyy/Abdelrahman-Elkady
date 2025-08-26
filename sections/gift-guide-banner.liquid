@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Guide Banner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        /* Main Banner Container */
+        .gift-guide-banner {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #000;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .brand-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .top-subtitle {
+            font-size: 0.8rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .choose-gift-btn {
+            background: #FFD700;
+            color: #000;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .choose-gift-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Banner Image */
+        .banner-image {
+            height: 90vh;
+            min-height: 500px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 100%;
+            margin-top: 80px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Placeholder for background image */
+        .banner-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('{{ "backgroundImage.jpg" | asset_url }}');
+        }
+
+        /* Content Section */
+        .content-section {
+            max-width: 430px;
+            margin: -250px 0 0 2rem;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+            background: #fff;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .content-card {
+            width: 100%;
+        }
+
+        .banner-title {
+            font-size: 3rem;
+            font-weight: 500;
+            margin: 0 0 1.5rem;
+            line-height: 1.1;
+            text-transform: uppercase;
+            color: #000;
+            letter-spacing: -1px;
+        }
+
+        .banner-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .shop-now-btn {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        .shop-now-btn:hover {
+            transform: translateX(10px);
+            background: #333;
+        }
+
+        /* Bottom Text */
+        .sustainable-text {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-color: #f8f8f8;
+            width: 100%;
+            margin-top: 2rem;
+            color: #666;
+        }
+
+        /* Arrow Animation */
+        @keyframes arrowBounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        .shop-now-btn .arrow,
+        .choose-gift-btn .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .shop-now-btn:hover .arrow,
+        .choose-gift-btn:hover .arrow {
+            animation: arrowBounce 1s infinite;
+        }
+
+        /* Tablet Responsive */
+        @media (max-width: 1024px) {
+            .content-section {
+                max-width: 400px;
+                margin: -200px 0 0 1.5rem;
+            }
+            
+            .banner-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 1rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .brand-name {
+                font-size: 1rem;
+            }
+            
+            .top-subtitle {
+                position: static;
+                transform: none;
+                order: 3;
+                width: 100%;
+                text-align: center;
+                margin-top: 0.5rem;
+                font-size: 0.7rem;
+            }
+            
+            .choose-gift-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .banner-image {
+                height: 60vh;
+                min-height: 300px;
+                margin-top: 100px;
+            }
+            
+            .content-section {
+                max-width: calc(100% - 2rem);
+                margin: -150px 1rem 0;
+                padding: 1.5rem;
+            }
+            
+            .banner-title {
+                font-size: 2.2rem;
+                margin-bottom: 1rem;
+            }
+            
+            .banner-description {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .shop-now-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem;
+            }
+            
+            .sustainable-text {
+                padding: 1.5rem 1rem;
+                font-size: 0.8rem;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Extra Small Mobile */
+        @media (max-width: 480px) {
+            .top-bar {
+                padding: 0.8rem;
+            }
+            
+            .brand-name {
+                font-size: 0.9rem;
+            }
+            
+            .choose-gift-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.7rem;
+            }
+            
+            .banner-image {
+                height: 50vh;
+                min-height: 250px;
+                margin-top: 90px;
+            }
+            
+            .content-section {
+                margin: -100px 0.5rem 0;
+                padding: 1rem;
+            }
+            
+            .banner-title {
+                font-size: 1.8rem;
+            }
+            
+            .banner-description {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+            
+            .shop-now-btn {
+                font-size: 0.9rem;
+            }
+            
+            .sustainable-text {
+                font-size: 0.7rem;
+                line-height: 1.4;
+            }
+        }
+
+        /* Large Screens */
+        @media (min-width: 1200px) {
+            .top-bar {
+                padding: 2rem 3rem;
+            }
+            
+            .content-section {
+                max-width: 500px;
+                margin: -300px 0 0 3rem;
+                padding: 2.5rem;
+            }
+            
+            .banner-title {
+                font-size: 3.5rem;
+            }
+            
+            .banner-description {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Ultra Wide Screens */
+        @media (min-width: 1600px) {
+            .banner-image {
+                height: 85vh;
+            }
+            
+            .content-section {
+                max-width: 550px;
+                margin: -350px 0 0 4rem;
+            }
+            
+            .banner-title {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gift-guide-banner">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="brand-name">TISSO VISION</div>
+            <div class="top-subtitle">Find the ideal gift for your loved ones</div>
+            <button class="choose-gift-btn">
+                CHOOSE GIFT
+                <span class="arrow">→</span>
+            </button>
+        </div>
+
+        <!-- Banner Image -->
+        <div class="banner-image"></div>
+        
+        <!-- Content Section -->
+        <div class="content-section">
+            <div class="content-card">
+                <h1 class="banner-title">The Gift Guide</h1>
+                <p class="banner-description">Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.</p>
+                <button class="shop-now-btn">
+                    SHOP NOW
+                    <span class="arrow">→</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bottom Text -->
+        <p class="sustainable-text">SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL</p>
+    </div>
+</body>
+</html>
